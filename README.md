@@ -44,3 +44,10 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Reference
+
+- https://ja.vuejs.org/
+- https://ja.vitejs.dev/
+- https://vite-pwa-org.netlify.app/
+- https://next.vuetifyjs.com/en/

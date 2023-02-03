@@ -7,8 +7,14 @@ import "./assets/main.css";
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
+import { registerSW } from 'virtual:pwa-register'
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+
+const updateSW = registerSW({
+  onNeedRefresh() {},
+  onOfflineReady() {},
+});
 
 const vuetify = createVuetify({
   components,
@@ -21,3 +27,4 @@ app.use(router);
 app.use(vuetify);
 
 app.mount("#app");
+

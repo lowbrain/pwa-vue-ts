@@ -4,12 +4,6 @@ import router from "./router";
 
 import "./assets/main.css";
 
-import { registerSW } from "virtual:pwa-register";
-const updateSW = registerSW({
-  onNeedRefresh() {},
-  onOfflineReady() {},
-});
-
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";

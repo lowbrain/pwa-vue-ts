@@ -14,7 +14,7 @@ const close = async () => {
     <div class="message">
       <span> New content available, click on reload button to update. </span>
     </div>
-    <button @click="updateServiceWorker(true)">Reload</button>
+    <button @click="updateServiceWorker()">Reload</button>
     <button @click="close">Close</button>
   </div>
 </template>
@@ -31,7 +31,8 @@ const close = async () => {
   z-index: 1;
   text-align: left;
   box-shadow: 3px 4px 5px 0 #8885;
-  background-color: rgb(0, 0, 0);
+  background-color: white;
+  color: black;
 }
 .pwa-toast .message {
   margin-bottom: 8px;

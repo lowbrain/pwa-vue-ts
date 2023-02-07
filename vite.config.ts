@@ -17,7 +17,6 @@ export default defineConfig({
         name: "pwa-vue-ts",
         short_name: "PVT",
         description: "pwa-vue-ts",
-        theme_color: "#ffffff",
         icons: [
           {
             src: "img/icon/android-chrome-192x192.png",

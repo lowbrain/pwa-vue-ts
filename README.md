@@ -51,3 +51,14 @@ npm run lint
 - https://ja.vitejs.dev/
 - https://vite-pwa-org.netlify.app/
 - https://next.vuetifyjs.com/en/
+
+## ToDo
+
+- CSSフレームワーク
+- PWAの更新制御をはっきりさせる
+- [The beforeinstallprompt event](https://web.dev/learn/pwa/installation-prompt/#the-beforeinstallprompt-event)
+- PWAがインストールされていなかったらインストールを求める画面を出し続ける
+- インストールできているのであればLoginボタンを表示
+- 外部サイトへの遷移->ウィンドウオープン->ウィンドウクローズ->外部サイトへ遷移->リダイレクト要求（PWAURLのパラメータ付き）
+- デジタル署名の検証
+- [Enhancing the install dialog](https://web.dev/learn/pwa/installation-prompt/#enhancing-the-install-dialog)

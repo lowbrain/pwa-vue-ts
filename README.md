@@ -62,3 +62,4 @@ npm run lint
 - 外部サイトへの遷移->ウィンドウオープン->ウィンドウクローズ->外部サイトへ遷移->リダイレクト要求（PWAURLのパラメータ付き）
 - デジタル署名の検証
 - [Enhancing the install dialog](https://web.dev/learn/pwa/installation-prompt/#enhancing-the-install-dialog)
+- サーバが生きてるかどうかを判定

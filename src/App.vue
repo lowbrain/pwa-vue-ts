@@ -4,11 +4,43 @@ import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
 
+const checkURL: string = "https://first-server.azurewebsites.net/check.html";
+const loginURL: string = "https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=" + encodeURIComponent(window.location.href);
+
+const checkServer = async () => {
+  try {
+    const response = await fetch(checkURL);
+    if ((await response.status) !== 200) {
+      throw `response.status = ${response.status}, response.statusText = ${response.statusText}`;
+    }
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};
+
+const login = (isConnect: boolean) => {
+  const param: string = window.location.search;
+  if (param.length === 0) {
+    if (isConnect) {
+      console.log("サーバに問い合わせログインします。");
+      window.location.href = loginURL;
+    } else {
+      console.log("キャッシュを利用してログインします。");
+    }
+  }
+};
+
 onMounted(() => {
   if (navigator.onLine) {
     console.log("online mode");
+    checkServer().then((result) => {
+      login(result);
+    });
   } else {
     console.log("offline mode");
+    login(false);
   }
 });
 </script>
@@ -19,11 +51,7 @@ onMounted(() => {
       <v-app-bar-title>PWA-VUE-TS</v-app-bar-title>
       <v-btn icon="mdi-dots-vertical"></v-btn>
     </v-app-bar>
-    <v-main>
-      <v-container>
-        <a href="https://popup.azurewebsites.net/popup.jsp?url=https%3A%2F%2Flowbrain.github.io%2Fpwa-vue-ts%2F"> jump </a>
-      </v-container>
-    </v-main>
+    <v-main> </v-main>
   </v-app>
   <!-- <header>
     <img

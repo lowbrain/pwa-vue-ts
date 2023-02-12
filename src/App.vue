@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
 import ReloadPrompt from "./ReloadPrompt.vue";
-console.log(location.href);
+
+onMounted(() => {
+  if (navigator.onLine) {
+    console.log("online mode");
+  } else {
+    console.log("offline mode");
+  }
+});
 </script>
 
 <template>

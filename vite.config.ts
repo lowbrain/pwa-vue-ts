@@ -11,8 +11,8 @@ export default defineConfig({
     vue(),
     VitePWA({
       devOptions: { enabled: true },
-      includeAssets: ["img/**/*"],
-      workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg}"] },
+      // includeAssets: ["img/**/*"],
+      // workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg}"] },
       manifest: {
         name: "pwa-vue-ts",
         short_name: "PVT",

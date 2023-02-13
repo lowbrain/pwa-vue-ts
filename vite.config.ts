@@ -18,7 +18,7 @@ export default defineConfig({
         name: "pwa-vue-ts",
         short_name: "PVT",
         description: "pwa-vue-ts",
-        display: "fullscreen",
+        display: "minimal-ui",
         theme_color: "#000000",
         background_color: "#000000",
         icons: [

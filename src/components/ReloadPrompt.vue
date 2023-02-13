@@ -1,12 +1,20 @@
 <script setup lang="ts">
+import { defineEmits, onMounted } from "vue";
 import { useRegisterSW } from "virtual:pwa-register/vue";
 
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
 
+const emit = defineEmits<{ (e: "continue"): void }>();
+
 const close = async () => {
   offlineReady.value = false;
   needRefresh.value = false;
+  emit("continue");
 };
+
+onMounted(() => {
+  if (!needRefresh.value) close();
+});
 </script>
 
 <template>

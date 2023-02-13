@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-import ReloadPrompt from "./ReloadPrompt.vue";
 
 const checkURL: string = "https://first-server.azurewebsites.net/check.html";
 const loginURL: string = "https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=" + encodeURIComponent(window.location.href);
@@ -32,36 +30,26 @@ const login = (isConnect: boolean) => {
   }
 };
 
-onMounted(() => {
-  if (window.matchMedia("(display-mode: fullscreen)").matches) {
-    alert("fullscreen");
-  } else if (window.matchMedia("(display-mode: standalone)").matches) {
-    alert("standalone");
-  } else if (window.matchMedia("(display-mode: minimal-ui)").matches) {
-    alert("minimal-ui");
-  } else if (window.matchMedia("(display-mode: browser)").matches) {
-    alert("browser");
-  }
-  // if (navigator.onLine) {
-  //   console.log("online mode");
-  //   checkServer().then((result) => {
-  //     login(result);
-  //   });
-  // } else {
-  //   console.log("offline mode");
-  //   login(false);
-  // }
+// onMounted(() => {
+//   if (window.matchMedia("(display-mode: standalone)").matches) {
+//     if (navigator.onLine) {
+//       console.log("online mode");
+//       checkServer().then((result) => {
+//         login(result);
+//       });
+//     } else {
+//       console.log("offline mode");
+//       login(false);
+//     }
+//   } else {
+//   }
 
-});
+// });
 </script>
 
 <template>
   <v-app>
-    <v-app-bar color="primary">
-      <v-app-bar-title>PWA-VUE-TS</v-app-bar-title>
-      <v-btn icon="mdi-dots-vertical"></v-btn>
-    </v-app-bar>
-    <v-main> </v-main>
+    <RouterView />
   </v-app>
   <!-- <header>
     <img

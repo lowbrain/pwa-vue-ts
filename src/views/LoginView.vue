@@ -2,7 +2,7 @@
 import ReloadPrompt from "../components/ReloadPrompt.vue";
 
 const login = () => {
-  console.log("login");
+  console.log("loginlogin");
 };
 </script>
 

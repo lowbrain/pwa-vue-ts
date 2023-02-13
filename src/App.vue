@@ -33,15 +33,25 @@ const login = (isConnect: boolean) => {
 };
 
 onMounted(() => {
-  if (navigator.onLine) {
-    console.log("online mode");
-    checkServer().then((result) => {
-      login(result);
-    });
-  } else {
-    console.log("offline mode");
-    login(false);
+  if (window.matchMedia("(display-mode: fullscreen)").matches) {
+    alert("fullscreen");
+  } else if (window.matchMedia("(display-mode: standalone)").matches) {
+    alert("standalone");
+  } else if (window.matchMedia("(display-mode: minimal-ui)").matches) {
+    alert("minimal-ui");
+  } else if (window.matchMedia("(display-mode: browser)").matches) {
+    alert("browser");
   }
+  // if (navigator.onLine) {
+  //   console.log("online mode");
+  //   checkServer().then((result) => {
+  //     login(result);
+  //   });
+  // } else {
+  //   console.log("offline mode");
+  //   login(false);
+  // }
+
 });
 </script>
 

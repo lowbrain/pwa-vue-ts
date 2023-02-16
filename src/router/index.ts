@@ -34,13 +34,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresInstall: boolean = to.matched.some((record) => record.meta.requiresInstall);
   const requiresLogin: boolean = to.matched.some((record) => record.meta.requiresLogin);
-
   const isStandalone: boolean = window.matchMedia("(display-mode: standalone)").matches;
-  const isLoggedIn = false;
+
+  const isLoggedIn = (): boolean => {
+    if (window.location.search.length !== 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   if (requiresInstall && !isStandalone) {
     next({ name: "home" });
-  } else if (requiresLogin && !isLoggedIn) {
+  } else if (requiresLogin && !isLoggedIn()) {
     next({ name: "login" });
   } else {
     next();

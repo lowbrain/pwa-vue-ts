@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ReloadPrompt from "../components/ReloadPrompt.vue";
+
 console.log("MenuView");
 </script>
 
@@ -8,4 +10,5 @@ console.log("MenuView");
     <v-btn icon="mdi-dots-vertical"></v-btn>
   </v-app-bar>
   <v-main> menu </v-main>
+  <ReloadPrompt />
 </template>

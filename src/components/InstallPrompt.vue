@@ -25,15 +25,11 @@ window.addEventListener("appinstalled", () => {
   <v-row justify="center">
     <v-dialog v-model="isInstallAble" persistent width="auto">
       <v-card>
-        <v-card-title class="text-h5">
-          インストールダイアログのタイトル
-        </v-card-title>
+        <v-card-title class="text-h5"> インストールダイアログのタイトル </v-card-title>
         <v-card-text>インストールダイアログの説明</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green-darken-1" variant="text" @click="installApp">
-            Install
-          </v-btn>
+          <v-btn color="green-darken-1" variant="text" @click="installApp"> Install </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

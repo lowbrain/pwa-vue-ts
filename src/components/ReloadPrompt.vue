@@ -21,9 +21,7 @@ console.log("ReloadPrompt");
 <template>
   <v-snackbar v-model="needRefresh" location="bottom right" timeout="-1">
     <span> New content available, click on reload button to update. </span>
-    <v-btn color="pink" variant="text" @click="updateServiceWorker()">
-      Reload
-    </v-btn>
+    <v-btn color="pink" variant="text" @click="updateServiceWorker()"> Reload </v-btn>
     <v-btn color="pink" variant="text" @click="close"> Close </v-btn>
   </v-snackbar>
 </template>

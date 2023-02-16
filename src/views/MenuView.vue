@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+console.log("MenuView");
+</script>
 
 <template>
   <v-app-bar color="primary">

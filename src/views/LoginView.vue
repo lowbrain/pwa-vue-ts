@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import ReloadPrompt from "../components/ReloadPrompt.vue";
-
-const login = () => {
-  console.log("loginlogin");
-};
+console.log("LoginView");
 </script>
 
-<template>
-  <ReloadPrompt @continue="login" />
-</template>
+<template>login</template>

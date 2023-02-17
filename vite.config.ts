@@ -15,12 +15,13 @@ export default defineConfig({
       includeAssets: ["img/**/*"],
       workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg}"] },
       manifest: {
-        name: "pwa-vue-ts",
-        short_name: "PVT",
-        description: "pwa-vue-ts",
+        name: "サンプルアプリケーション名",
+        short_name: "サンプルアプリ",
+        description: "サンプルアプリケーションの説明",
         display: "standalone",
-        theme_color: "#000000",
-        background_color: "#000000",
+        theme_color: "#6200ee",
+        background_color: "#ffffff",
+        lang: "ja",
         icons: [
           {
             src: "img/icon/android-chrome-192x192.png",
@@ -33,10 +34,30 @@ export default defineConfig({
             type: "image/png",
           },
           {
+            src: "img/icon/maskable_icon_x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable",
+          },
+          {
             src: "img/icon/maskable_icon_x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "maskable",
+          },
+        ],
+        screenshots: [
+          {
+            src: "img/screenshots/screenshot1.png",
+            sizes: "292x600",
+            type: "image/png",
+            label: "screenshot1",
+          },
+          {
+            src: "img/screenshots/screenshot2.png",
+            sizes: "292x600",
+            type: "image/png",
+            label: "screenshot2",
           },
         ],
       },

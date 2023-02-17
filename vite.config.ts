@@ -48,14 +48,14 @@ export default defineConfig({
         ],
         screenshots: [
           {
-            src: "img/screenshots/screenshot1.png",
-            sizes: "292x600",
+            src: "img/screenshot/screenshot1.png",
+            sizes: "1309x821",
             type: "image/png",
             label: "screenshot1",
           },
           {
-            src: "img/screenshots/screenshot2.png",
-            sizes: "292x600",
+            src: "img/screenshot/screenshot2.png",
+            sizes: "1309x821",
             type: "image/png",
             label: "screenshot2",
           },

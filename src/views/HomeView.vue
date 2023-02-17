@@ -12,5 +12,7 @@ console.log("HomeView");
 
 <template>
   <span>Home</span>
+  <a href="web+pwavuets://">home</a>
+  <a href="web+pwavuets://menu">menu</a>
   <ReloadPrompt @continue="loaded" />
 </template>

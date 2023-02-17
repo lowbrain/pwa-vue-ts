@@ -13,7 +13,7 @@ export default defineConfig({
       injectRegister: "inline",
       devOptions: { enabled: true },
       includeAssets: ["img/**/*"],
-      workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg}"] },
+      workbox: { globPatterns: ["**/*.{js,css,html,ico,png,jpg}"] },
       manifest: {
         name: "サンプルアプリケーション名",
         short_name: "サンプルアプリ",
@@ -26,7 +26,7 @@ export default defineConfig({
         protocol_handlers: [
           {
             protocol: "web+pwavuets",
-            url: "%s",
+            url: "/?from=%s",
           },
         ],
         icons: [

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRegisterSW } from "virtual:pwa-register/vue";
 
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();

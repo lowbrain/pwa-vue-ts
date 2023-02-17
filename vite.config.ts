@@ -26,7 +26,7 @@ export default defineConfig({
         protocol_handlers: [
           {
             protocol: "web+pwavuets",
-            url: "%s",
+            url: "",
           },
         ],
         icons: [

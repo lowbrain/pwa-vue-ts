@@ -15,6 +15,8 @@ export default defineConfig({
       includeAssets: ["img/**/*"],
       workbox: { globPatterns: ["**/*.{js,css,html,ico,png,svg}"] },
       manifest: {
+        id: ".",
+        scope: ".",
         name: "サンプルアプリケーション名",
         short_name: "サンプルアプリ",
         description: "サンプルアプリケーションの説明",
@@ -48,17 +50,22 @@ export default defineConfig({
         ],
         screenshots: [
           {
-            src: "img/screenshot/screenshot1.png",
-            sizes: "1309x821",
-            type: "image/png",
-            label: "screenshot1",
+            src: "https://i.pinimg.com/originals/a9/88/c1/a988c1bf6e66482d5292e2c0c52f2dde.gif",
+            sizes: "320x640",
+            type: "image/gif"
           },
-          {
-            src: "img/screenshot/screenshot2.png",
-            sizes: "1309x821",
-            type: "image/png",
-            label: "screenshot2",
-          },
+          // {
+          //   src: "img/screenshot/screenshot1.png",
+          //   sizes: "1309x821",
+          //   type: "image/png",
+          //   label: "screenshot1",
+          // },
+          // {
+          //   src: "img/screenshot/screenshot2.png",
+          //   sizes: "1309x821",
+          //   type: "image/png",
+          //   label: "screenshot2",
+          // },
         ],
       },
     }),

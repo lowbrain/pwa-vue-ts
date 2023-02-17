@@ -34,7 +34,7 @@ jobs:
           node-version: 18
           cache: 'npm'
       - run: npm ci
-      - run: npm run build-only --if-present -- --base /pwa-vue-ts/
+      - run: npm run build-only --if-present -- --base ./
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

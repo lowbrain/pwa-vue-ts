@@ -8,7 +8,7 @@ console.log("MenuView");
 <template>
   <v-app-bar color="primary">
     <v-app-bar-title>PWA-VUE-TS</v-app-bar-title>
-    <v-btn :icon="mdiDotsVIcon"></v-btn>
+    <v-btn :icon="mdiDotsVIcon" color="secondary"></v-btn>
   </v-app-bar>
   <v-main> menu </v-main>
   <ReloadPrompt />

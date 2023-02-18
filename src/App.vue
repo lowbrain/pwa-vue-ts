@@ -4,6 +4,8 @@ import InstallPrompt from "./components/InstallPrompt.vue";
 </script>
 
 <template>
-  <v-app><RouterView /></v-app>
+  <v-app>
+    <RouterView />
+  </v-app>
   <InstallPrompt />
 </template>

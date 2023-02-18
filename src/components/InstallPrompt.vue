@@ -29,7 +29,7 @@ window.addEventListener("appinstalled", () => {
         <v-card-text>インストールダイアログの説明</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green-darken-1" variant="text" @click="installApp"> Install </v-btn>
+          <v-btn variant="text" @click="installApp"> Install </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

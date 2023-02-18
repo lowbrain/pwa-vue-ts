@@ -20,13 +20,21 @@ export default defineConfig({
         categories: ["reference"],
         description: "サンプルアプリケーションの説明",
         display: "standalone",
-        theme_color: "#6200ee",
+        theme_color: "#6750A4",
         background_color: "#ffffff",
         lang: "ja",
         protocol_handlers: [
           {
-            protocol: "web+pwavuets",
+            protocol: "web+pvt",
             url: "./?from=%s",
+          },
+          {
+            protocol: "web+pvtlogin",
+            url: "./login?from=%s",
+          },
+          {
+            protocol: "web+pvt",
+            url: "./menu?from=%s",
           },
         ],
         icons: [

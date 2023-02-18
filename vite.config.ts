@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      injectRegister: "inline",
+      injectRegister: "script",
       devOptions: { enabled: true },
       includeAssets: ["img/**/*"],
       workbox: { globPatterns: ["**/*.{js,css,html,ico,png,jpg}"] },

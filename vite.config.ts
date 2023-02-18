@@ -23,12 +23,12 @@ export default defineConfig({
         theme_color: "#6200ee",
         background_color: "#ffffff",
         lang: "ja",
-        // protocol_handlers: [
-        //   {
-        //     protocol: "web+pwavuets",
-        //     url: "/test?from=%s",
-        //   },
-        // ],
+        protocol_handlers: [
+          {
+            protocol: "web+pwavuets",
+            url: "%s",
+          },
+        ],
         icons: [
           {
             src: "img/icon/android-chrome-192x192.png",

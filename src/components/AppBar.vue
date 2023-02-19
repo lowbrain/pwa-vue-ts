@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import router from "@/router";
 import { mdiDotsVertical } from "@mdi/js";
 
 const restartApp = () => {
   console.log("restart");
+  router.push({ name: "home" });
 };
 
 const exitApp = () => {
   console.log("exit");
+  console.log(history.length);
+  history.go(history.length * -1 + 1);
+  window.close();
 };
 </script>
 

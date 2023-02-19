@@ -9,8 +9,7 @@ const restartApp = () => {
 
 const exitApp = () => {
   console.log("exit");
-  console.log(history.length);
-  // history.go(history.length * -1 + 1);
+  history.go(history.length * -1 + 1);
   window.close();
 };
 </script>
@@ -23,8 +22,8 @@ const exitApp = () => {
         <v-btn :icon="mdiDotsVertical" v-bind="props" color="secondary"></v-btn>
       </template>
       <v-list>
-        <v-list-item title="再起動" @click="restartApp" />
-        <v-list-item title="終了" @click="exitApp" />
+        <v-list-item title="再認証" @click="restartApp" />
+        <v-list-item title="閉じる" @click="exitApp" />
       </v-list>
     </v-menu>
   </v-app-bar>

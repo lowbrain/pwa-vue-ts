@@ -11,8 +11,7 @@ const exitApp = () => {
   console.log("exit");
   console.log(history.length);
   // history.go(history.length * -1 + 1);
-  history.go(history.length * -1);
-  // window.close();
+  window.close();
 };
 </script>
 

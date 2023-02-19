@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mdiDotsVertical } from "@mdi/js";
-import ReloadPrompt from "../components/ReloadPrompt.vue";
+import ReloadPrompt from "@/components/ReloadPrompt.vue";
 const mdiDotsVIcon = mdiDotsVertical;
 console.log("MenuView");
 </script>

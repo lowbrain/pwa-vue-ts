@@ -2,7 +2,17 @@
 import { onMounted } from "vue";
 import { useRegisterSW } from "virtual:pwa-register/vue";
 
-const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({ immediate: true });
+const intervalMS: number = 60 * 1000;
+const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
+  immediate: true,
+  onRegistered(r) {
+    r &&
+      setInterval(() => {
+        r.update();
+      }, intervalMS);
+  },
+});
+
 const emit = defineEmits<{ (e: "continue"): void }>();
 
 const close = async () => {

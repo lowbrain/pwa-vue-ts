@@ -14,4 +14,5 @@ import InstallPrompt from "@/components/InstallPrompt.vue";
     </v-footer>
   </v-app>
   <InstallPrompt />
+  <ReloadPrompt />
 </template>

@@ -1,29 +1,20 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import { useRegisterSW } from "virtual:pwa-register/vue";
 
 const intervalMS: number = 60 * 1000;
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
   onRegisteredSW(swUrl, r) {
-    if (r) {
-      const update = async () => await r.update();
-      update();
-      setInterval(update, intervalMS);
-    }
+    r &&
+      setInterval(async () => {
+        await r.update();
+      }, intervalMS);
   },
 });
-
-const emit = defineEmits<{ (e: "continue"): void }>();
 
 const close = async () => {
   offlineReady.value = false;
   needRefresh.value = false;
-  emit("continue");
 };
-
-onMounted(() => {
-  if (!needRefresh.value) close();
-});
 
 console.log("ReloadPrompt");
 </script>

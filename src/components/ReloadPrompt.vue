@@ -4,11 +4,10 @@ import { useRegisterSW } from "virtual:pwa-register/vue";
 
 const intervalMS: number = 60 * 1000;
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
-  immediate: true,
-  onRegistered(r) {
+  onRegisteredSW(swUrl, r) {
     r &&
-      setInterval(() => {
-        r.update();
+      setInterval(async () => {
+        await r.update();
       }, intervalMS);
   },
 });

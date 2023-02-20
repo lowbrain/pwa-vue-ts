@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import { useRegisterSW } from "virtual:pwa-register/vue";
 
-const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
+const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({ immediate: true });
 const emit = defineEmits<{ (e: "continue"): void }>();
 
 const close = async () => {

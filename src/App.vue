@@ -3,6 +3,9 @@ import { RouterView } from "vue-router";
 import appVersion from "@/modules/appversion";
 import InstallPrompt from "@/components/InstallPrompt.vue";
 import ReloadPrompt from "./components/ReloadPrompt.vue";
+let item: string = "" + sessionStorage.getItem("name");
+console.log(item);
+sessionStorage.setItem("name", item + "太郎");
 </script>
 
 <template>

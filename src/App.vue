@@ -2,6 +2,7 @@
 import { RouterView } from "vue-router";
 import appVersion from "@/modules/appversion";
 import InstallPrompt from "@/components/InstallPrompt.vue";
+import ReloadPrompt from "./components/ReloadPrompt.vue";
 </script>
 
 <template>

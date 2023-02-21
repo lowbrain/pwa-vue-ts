@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import router from "@/router";
-import ReloadPrompt from "@/components/ReloadPrompt.vue";
 import { checkServerStatus } from "@/modules/check-status";
 
 const items = [

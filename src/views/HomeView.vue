@@ -25,17 +25,17 @@ const items = [
 
 const loaded = () => {
   if (window.matchMedia("(display-mode: standalone)").matches) {
-    overlay.value=true;
+    overlay.value = true;
     checkServerStatus(10)
       .then(() => {
-        overlay.value=false;
+        overlay.value = false;
         router.push({ name: "menu" });
       })
       .catch((err) => {
+        overlay.value = false;
         console.log(err);
-        overlay.value=false;
         alert("サーバに接続できませんでした。");
-        router.push({ name: "menu" });
+        //router.push({ name: "menu" });
       });
   }
 };

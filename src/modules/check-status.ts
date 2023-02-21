@@ -10,8 +10,8 @@ const checkServerStatus = async (timeout: number) => {
     // サーバへの接続確認
     try {
       const response1 = await fetch(SERVER_URL1, { signal: ctrl.signal });
-      const response2 = await fetch(SERVER_URL1, { signal: ctrl.signal });
-      if (response1.status !== 200 || response2.status !== 200) {
+      const response2 = await fetch(SERVER_URL2, { signal: ctrl.signal });
+      if ((await response1.status) !== 200 || (await response2.status) !== 200) {
         throw `http status error.
           fetch.url = ${SERVER_URL1}, = response.status = ${response1.status}, response.statusText = ${response1.statusText}
           fetch.url = ${SERVER_URL2}, = response.status = ${response2.status}, response.statusText = ${response2.statusText}`;

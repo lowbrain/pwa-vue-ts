@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import router from "@/router";
 import { checkServerStatus } from "@/modules/check-status";
+
+const overlay = ref<boolean>(false);
 
 const items = [
   {
@@ -23,12 +25,15 @@ const items = [
 
 const loaded = () => {
   if (window.matchMedia("(display-mode: standalone)").matches) {
+    overlay.value=true;
     checkServerStatus(10)
       .then(() => {
+        overlay.value=false;
         router.push({ name: "menu" });
       })
       .catch((err) => {
         console.log(err);
+        overlay.value=false;
         alert("サーバに接続できませんでした。");
         router.push({ name: "menu" });
       });
@@ -59,4 +64,7 @@ console.log("HomeView");
       </ul>
     </div>
   </v-sheet>
+  <v-overlay :model-value="overlay" class="align-center justify-center">
+    <v-progress-circular color="primary" indeterminate size="64"></v-progress-circular>
+  </v-overlay>
 </template>

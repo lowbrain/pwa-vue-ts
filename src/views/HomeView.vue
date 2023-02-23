@@ -7,17 +7,17 @@ const items = [
   {
     title: "Home",
     disabled: false,
-    href: "web+pvt://",
+    href: "./",
   },
   {
     title: "Login",
     disabled: false,
-    href: "web+pvtlogin://",
+    href: "./login",
   },
   {
     title: "Menu",
     disabled: false,
-    href: "web+pvtmenu://",
+    href: "./menu",
   },
 ];
 

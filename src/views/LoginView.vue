@@ -42,11 +42,13 @@ console.log("LoginView");
 
 <template>
   <v-main class="mx-auto">
-    <v-alert v-if="errMsg.isError" border="start" class="ma-6" title="ERROR" color="error">
-      <p>サーバに接続できませんでした。</p>
-      <p>{{ errMsg.message }}</p>
-    </v-alert>
+    <template v-if="errMsg.isError">
+      <v-alert border="start" class="ma-6" title="ERROR" color="error">
+        <p>サーバに接続できませんでした。</p>
+        <p>{{ errMsg.message }}</p>
+      </v-alert>
+      <AppLogo />
+    </template>
     <ProgressOverlay v-else />
-    <AppLogo />
   </v-main>
 </template>

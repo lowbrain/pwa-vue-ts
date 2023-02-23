@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted,ref } from "vue";
+import { onMounted, reactive } from "vue";
 import router from "@/router";
 import { checkServerStatus } from "@/modules/check-status";
 import AppLogo from "@/components/AppLogo.vue";
@@ -10,7 +10,10 @@ const returnUrl = `${location.protocol}//${location.host}${import.meta.env.BASE_
 // eslint-disable-next-line prettier/prettier
 const loginURL: string = "https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=" + returnUrl;
 
-const errMsg: any = ref(null);
+const errMsg = reactive({
+  isError: false,
+  message: "",
+});
 
 onMounted(() => {
   if (window.location.search.length !== 0) {
@@ -24,7 +27,8 @@ onMounted(() => {
           window.location.href = loginURL;
         })
         .catch((err) => {
-          errMsg.value = `サーバに接続できませんでした。${err}`;
+          errMsg.isError = true;
+          errMsg.message = err;
         });
     } else {
       console.log("キャッシュを利用してログインします。");
@@ -38,8 +42,11 @@ console.log("LoginView");
 
 <template>
   <v-main class="mx-auto">
+    <v-alert v-if="errMsg.isError" border="start" class="ma-6" title="ERROR" color="error">
+      <p>サーバに接続できませんでした。</p>
+      <p>{{ errMsg.message }}</p>
+    </v-alert>
+    <ProgressOverlay v-else />
     <AppLogo />
-    <v-alert class="ma-6" v-if="errMsg" title="エラー" type="error" :text="errMsg" />
   </v-main>
-  <ProgressOverlay />
 </template>

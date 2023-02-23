@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import MenuView from "@/views/MenuView.vue";
 import LoginView from "@/views/LoginView.vue";
+import { checkAuthInfo } from "@/modules/check-status";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,41 +14,23 @@ const router = createRouter({
       alias: "/index.html",
     },
     {
-      path: "/menu",
-      name: "menu",
-      meta: {
-        requiresInstall: true,
-        requiresLogin: true,
-      },
-      component: MenuView,
-    },
-    {
       path: "/login",
       name: "login",
-      meta: {
-        requiresInstall: true,
-      },
       component: LoginView,
+    },
+    {
+      path: "/menu",
+      name: "menu",
+      meta: { requiresLogin: true },
+      component: MenuView,
     },
   ],
 });
 
 router.beforeEach((to, from, next) => {
-  const requiresInstall: boolean = to.matched.some((record) => record.meta.requiresInstall);
   const requiresLogin: boolean = to.matched.some((record) => record.meta.requiresLogin);
-  const isStandalone: boolean = window.matchMedia("(display-mode: standalone)").matches;
 
-  const isLoggedIn = (): boolean => {
-    if (window.location.search.length !== 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  if (requiresInstall && !isStandalone) {
-    next({ name: "home" });
-  } else if (requiresLogin && !isLoggedIn()) {
+  if (requiresLogin && !checkAuthInfo()) {
     next({ name: "login" });
   } else {
     next();

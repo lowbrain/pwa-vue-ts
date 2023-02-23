@@ -31,7 +31,11 @@ const checkServerStatus = async (timeout: number) => {
 
 const checkAuthInfo = (): boolean => {
   console.log("未実装");
-  return true;
+  if (window.location.search.length !== 0) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export { checkServerStatus, checkAuthInfo };

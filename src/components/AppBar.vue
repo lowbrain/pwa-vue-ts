@@ -12,7 +12,7 @@ const reloginApp = () => {
 const displayExitApp = ref(navigator.userAgent.indexOf("Android") > 0);
 const exitApp = () => {
   console.log(`exit:${history.length}`);
-  history.go(history.length * -1);
+  history.go(history.length * -1 + 1);
 };
 </script>
 

@@ -3,21 +3,23 @@ import { onMounted } from "vue";
 import router from "@/router";
 import AppLogo from "@/components/AppLogo.vue";
 
+const startUrl = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}`;
+
 const items = [
   {
     title: "Home",
     disabled: false,
-    href: "./",
+    href: `${startUrl}`,
   },
   {
     title: "Login",
     disabled: false,
-    href: "./login",
+    href: `${startUrl}login`,
   },
   {
     title: "Menu",
     disabled: false,
-    href: "./menu",
+    href: `${startUrl}menu`,
   },
 ];
 

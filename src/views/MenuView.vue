@@ -1,11 +1,25 @@
 <script setup lang="ts">
+import router from "@/router";
 import AppBar from "@/components/AppBar.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import ReloadPrompt from "@/components/ReloadPrompt.vue";
 
 const slides = ["First", "Second", "Third", "Fourth", "Fifth"];
 
-console.log("MenuView");
+const timeout: number = 5 * 60 * 1000;
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    if (sessionStorage.getItem("LAST_TIME")) {
+      let lastTime: number = Number(sessionStorage.getItem("LAST_TIME"));
+      if (Date.now() - lastTime >= timeout) {
+        alert("一定時間が経過したため再認証してください。");
+        router.push({ name: "home" });
+      }
+    }
+  } else {
+    sessionStorage.setItem("LAST_TIME", String(Date.now()));
+  }
+});
 </script>
 
 <template>

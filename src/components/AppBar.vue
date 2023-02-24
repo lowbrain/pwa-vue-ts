@@ -2,10 +2,7 @@
 import router from "@/router";
 import { mdiDotsVertical } from "@mdi/js";
 
-const reloginApp = () => {
-  console.log("relogin");
-  router.push({ name: "home" });
-};
+const reloginApp = () => router.push({ name: "home" });
 </script>
 
 <template>

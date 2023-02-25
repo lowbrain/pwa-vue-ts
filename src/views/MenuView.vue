@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import router from "@/router";
 import AppBar from "@/components/AppBar.vue";
 import AppFooter from "@/components/AppFooter.vue";
@@ -8,6 +9,7 @@ import AuthInfo from "@/modules/authinfo";
 const slides = ["First", "Second", "Third", "Fourth", "Fifth"];
 
 const authInfo = AuthInfo.getLoginInstance();
+const time = ref(new Date());
 
 const timeout: number = 5 * 60 * 1000;
 document.addEventListener("visibilitychange", () => {
@@ -19,6 +21,7 @@ document.addEventListener("visibilitychange", () => {
         AuthInfo.removeLoginInstance();
         router.push({ name: "home" });
       }
+      time.value = new Date(lastTime);
     }
   } else {
     sessionStorage.setItem("LAST_TIME", String(Date.now()));
@@ -35,7 +38,8 @@ document.addEventListener("visibilitychange", () => {
           <div class="d-flex flex-column fill-height justify-center align-center">
             <div class="text-h2">{{ slide }} Slide</div>
             <div class="mt-6">{{ authInfo.userid }}</div>
-            <div>{{ authInfo.timestamp }}</div>
+            <div>LOGIN_TIME：{{ authInfo.timestamp }}</div>
+            <div>LAST_TIME：{{ time }}</div>
           </div>
         </v-sheet>
       </v-carousel-item>

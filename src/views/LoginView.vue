@@ -24,7 +24,7 @@ onMounted(async () => {
     try {
       const authInfo = new AuthInfo(param.get("auth") ?? "");
       authInfo.cache();
-      authInfo.login();
+      await authInfo.login();
       router.push({ name: "menu" });
     } catch (err: any) {
       errMsg.isError = true;

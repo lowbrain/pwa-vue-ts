@@ -1,3 +1,5 @@
+import { verify } from "@/modules/token";
+
 export default class AuthInfo {
   private _token: string;
   private _userid: string;
@@ -49,8 +51,9 @@ export default class AuthInfo {
     localStorage.removeItem("AUTH_INFO");
   }
 
-  public login(): void {
-    if (this.verify()) {
+  public async login() {
+    const result = await this.verify();
+    if (result) {
       sessionStorage.setItem("LOGIN_AUTH_INFO", this.toString());
     } else {
       throw "認証トークンに含まれるデジタル証明の検証に失敗しました。";
@@ -61,9 +64,11 @@ export default class AuthInfo {
     localStorage.setItem("AUTH_INFO", this.toString());
   }
 
-  public verify(): boolean {
-    console.log("verify");
-    return true;
+  public async verify(): Promise<boolean> {
+    const tokens = this._token.split(".");
+    const data = decodeBase64URL(tokens[0]);
+    const signature = decodeBase64URL(tokens[1]);
+    return await verify(data, signature);
   }
 
   public get token(): string {

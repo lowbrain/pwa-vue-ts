@@ -4,6 +4,7 @@ import router from "@/router";
 import { checkServerStatus } from "@/modules/check-status";
 import AppLogo from "@/components/AppLogo.vue";
 import ProgressOverlay from "@/components/ProgressOverlay.vue";
+import AuthInfo from "@/modules/authinfo";
 
 const returnUrl = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}login`;
 
@@ -15,29 +16,34 @@ const errMsg = reactive({
   message: "",
 });
 
-onMounted(() => {
-  if (window.location.search.length !== 0) {
-    console.log("authentication process");
-    router.push({ name: "menu" });
-  } else {
-    if (navigator.onLine) {
-      console.log("サーバに問い合わせログインします。");
-      checkServerStatus(10)
-        .then(() => {
-          window.location.href = loginURL;
-        })
-        .catch((err) => {
-          errMsg.isError = true;
-          errMsg.message = err;
-        });
-    } else {
-      console.log("キャッシュを利用してログインします。");
-      window.location.href = window.location.href + "?auth=cache";
+onMounted(async () => {
+  const param = new URLSearchParams(window.location.search);
+  console.log(param.get("auth"));
+  if (param.has("auth")) {
+    console.log("ログインが完了しました。");
+    try {
+      const authInfo = new AuthInfo(param.get("auth") ?? "");
+      authInfo.cache();
+      authInfo.login();
+      router.push({ name: "menu" });
+    } catch (err: any) {
+      errMsg.isError = true;
+      errMsg.message = err;
     }
+  } else if (navigator.onLine) {
+    console.log("サーバに問い合わせログインします。");
+    try {
+      await checkServerStatus(10);
+      window.location.href = loginURL;
+    } catch (err: any) {
+      errMsg.isError = true;
+      errMsg.message = err;
+    }
+  } else {
+    console.log("キャッシュを利用してログインします。");
+    window.location.href = window.location.href + "?auth=cache";
   }
 });
-
-console.log("LoginView");
 </script>
 
 <template>

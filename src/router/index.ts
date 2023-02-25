@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import MenuView from "@/views/MenuView.vue";
 import LoginView from "@/views/LoginView.vue";
-import { checkAuthInfo } from "@/modules/check-status";
+import AuthInfo from "@/modules/authinfo";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +30,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresLogin: boolean = to.matched.some((record) => record.meta.requiresLogin);
 
-  if (requiresLogin && !checkAuthInfo()) {
+  if (requiresLogin && !AuthInfo.isLogin()) {
     next({ name: "login" });
   } else {
     next();

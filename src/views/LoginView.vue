@@ -47,14 +47,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-main class="mx-auto">
-    <template v-if="errMsg.isError">
-      <v-alert border="start" class="ma-6" title="ERROR" color="error">
-        <p>サーバに接続できませんでした。</p>
-        <p>{{ errMsg.message }}</p>
-      </v-alert>
-      <AppLogo />
-    </template>
-    <ProgressOverlay v-else />
+  <v-main>
+    <v-container>
+      <template v-if="errMsg.isError">
+        <v-alert border="start" title="ERROR" variant="tonal" color="error">
+          <p>サーバに接続できませんでした。</p>
+          <p>{{ errMsg.message }}</p>
+        </v-alert>
+        <AppLogo />
+      </template>
+      <ProgressOverlay v-else />
+    </v-container>
   </v-main>
 </template>

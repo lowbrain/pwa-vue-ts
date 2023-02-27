@@ -32,18 +32,20 @@ document.addEventListener("visibilitychange", () => {
 <template>
   <AppBar />
   <v-main>
-    <v-carousel height="600" :show-arrows="false" hide-delimiter-background color="primary">
-      <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <v-sheet height="100%">
-          <div class="d-flex flex-column fill-height justify-center align-center">
-            <div class="text-h2">{{ slide }} Slide</div>
-            <div class="mt-6">{{ authInfo.userid }}</div>
-            <div>LOGIN_TIME：{{ authInfo.timestamp }}</div>
-            <div>LAST_TIME：{{ time }}</div>
-          </div>
-        </v-sheet>
-      </v-carousel-item>
-    </v-carousel>
+    <v-container>
+      <v-carousel height="600" :show-arrows="false" hide-delimiter-background color="primary">
+        <v-carousel-item v-for="(slide, i) in slides" :key="i">
+          <v-sheet height="100%">
+            <div class="d-flex flex-column fill-height justify-center align-center">
+              <div class="text-h2">{{ slide }} Slide</div>
+              <div class="mt-6">{{ authInfo.userid }}</div>
+              <div>LOGIN_TIME：{{ authInfo.timestamp.toLocaleString() }}</div>
+              <div>LAST_TIME：{{ time.toLocaleString() }}</div>
+            </div>
+          </v-sheet>
+        </v-carousel-item>
+      </v-carousel>
+    </v-container>
   </v-main>
   <AppFooter />
   <ReloadPrompt />

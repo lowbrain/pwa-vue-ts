@@ -15,13 +15,13 @@ console.log("HomeView");
 </script>
 
 <template>
-  <v-main class="mx-auto">
-    <v-alert v-if="isBrowser" border="start" title="WARNING" class="ma-6" variant="tonal" color="warning">
-      <p>本サイトはインストールしたサンプルアプリからの利用を推奨しております。続行しますか？</p>
-      <div class="text-end"><v-btn variant="plain" href="menu" class="text-end" color="warning">続行する</v-btn></div>
-    </v-alert>
-    <AppLogo />
-    <v-sheet>
+  <v-main>
+    <v-container>
+      <v-alert v-if="isBrowser" border="start" title="WARNING" variant="tonal" color="warning">
+        <p>本サイトはインストールしたサンプルアプリからの利用を推奨しております。続行しますか？</p>
+        <div class="text-end"><v-btn variant="plain" href="menu" class="text-end" color="warning">続行する</v-btn></div>
+      </v-alert>
+      <AppLogo />
       <div>
         <p class="text-subtitle-1 text-center">本サンプルアプリは以下コンポーネントをもとに実装しています。</p>
         <v-table fixed-header height="300px">
@@ -63,6 +63,6 @@ console.log("HomeView");
           </tbody>
         </v-table>
       </div>
-    </v-sheet>
+    </v-container>
   </v-main>
 </template>

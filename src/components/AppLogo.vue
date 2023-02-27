@@ -21,7 +21,7 @@ const items = [
 </script>
 
 <template>
-  <v-sheet class="mx-auto mt-8" color="background">
+  <v-sheet class="mt-8">
     <v-img src="/img/icon/android-chrome-512x512.png" width="256" height="256" class="mx-auto" />
     <div class="text-h4 font-weight-bold text-center mt-6">サンプルアプリ</div>
     <v-breadcrumbs :items="items" class="justify-center" color="primary"></v-breadcrumbs>

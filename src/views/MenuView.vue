@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import router from "@/router";
-import AppBar from "@/components/AppBar.vue";
-import AppFooter from "@/components/AppFooter.vue";
-import ReloadPrompt from "@/components/ReloadPrompt.vue";
 import AuthInfo from "@/modules/authinfo";
+import AppBar from "@/components/layout/AppBar.vue";
+import AppFooter from "@/components/layout/AppFooter.vue";
+import ReloadPrompt from "@/components/prompt/ReloadPrompt.vue";
 
 const slides = ["First", "Second", "Third", "Fourth", "Fifth"];
 
@@ -39,8 +39,8 @@ document.addEventListener("visibilitychange", () => {
             <div class="d-flex flex-column fill-height justify-center align-center">
               <div class="text-h2">{{ slide }} Slide</div>
               <div class="mt-6">{{ authInfo.userid }}</div>
-              <div>LOGIN_TIME：{{ authInfo.timestamp.toLocaleString() }}</div>
-              <div>LAST_TIME：{{ time.toLocaleString() }}</div>
+              <div>LOGIN_TIME:{{ authInfo.timestamp.toLocaleString() }}</div>
+              <div>LAST_TIME:{{ time.toLocaleString() }}</div>
             </div>
           </v-sheet>
         </v-carousel-item>

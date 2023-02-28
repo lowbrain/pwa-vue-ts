@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import router from "@/router";
-import AppLogo from "@/components/AppLogo.vue";
+import AppLogo from "@/components/layout/AppLogo.vue";
+import ComponentTable from "@/components/parts/ComponentTable.vue";
 
 const isBrowser = ref(window.matchMedia("(display-mode: browser)").matches);
 
@@ -10,8 +11,6 @@ onMounted(() => {
     router.push({ name: "menu" });
   }
 });
-
-console.log("HomeView");
 </script>
 
 <template>
@@ -22,47 +21,7 @@ console.log("HomeView");
         <div class="text-end"><v-btn variant="plain" href="menu" class="text-end" color="warning">続行する</v-btn></div>
       </v-alert>
       <AppLogo />
-      <div>
-        <p class="text-subtitle-1 text-center">本サンプルアプリは以下コンポーネントをもとに実装しています。</p>
-        <v-table fixed-header height="300px">
-          <thead>
-            <tr>
-              <th class="text-left">Name</th>
-              <th class="text-left">Ver</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>vue</td>
-              <td>v3.2.45</td>
-            </tr>
-            <tr>
-              <td>vue-router</td>
-              <td>v4.1.6</td>
-            </tr>
-            <tr>
-              <td>vuetify</td>
-              <td>v3.1.3</td>
-            </tr>
-            <tr>
-              <td>typescript</td>
-              <td>v4.7.4</td>
-            </tr>
-            <tr>
-              <td>vite</td>
-              <td>v4.0.0</td>
-            </tr>
-            <tr>
-              <td>vite-plugin-pwa</td>
-              <td>v0.14.1</td>
-            </tr>
-            <tr>
-              <td>npm</td>
-              <td>v8.19.3</td>
-            </tr>
-          </tbody>
-        </v-table>
-      </div>
+      <ComponentTable />
     </v-container>
   </v-main>
 </template>

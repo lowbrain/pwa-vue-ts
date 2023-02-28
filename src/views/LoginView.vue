@@ -2,8 +2,8 @@
 import { onMounted, reactive } from "vue";
 import router from "@/router";
 import { checkServerStatus } from "@/modules/check-status";
-import AppLogo from "@/components/AppLogo.vue";
-import ProgressOverlay from "@/components/ProgressOverlay.vue";
+import AppLogo from "@/components/layout/AppLogo.vue";
+import ProgressOverlay from "@/components/parts/ProgressOverlay.vue";
 import AuthInfo from "@/modules/authinfo";
 
 const returnUrl = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}login`;

@@ -35,14 +35,6 @@ export default class AuthInfo {
     return new AuthInfo(sessionStorage.getItem("LOGIN_AUTH_INFO") ?? "");
   }
 
-  public static isLogin(): boolean {
-    if (sessionStorage.getItem("LOGIN_AUTH_INFO")) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   public static removeLoginInstance(): void {
     sessionStorage.removeItem("LOGIN_AUTH_INFO");
   }

@@ -29,13 +29,12 @@ const checkServerStatus = async (timeout: number) => {
   }
 };
 
-const checkAuthInfo = (): boolean => {
-  console.log("未実装");
-  if (window.location.search.length !== 0) {
+const isLogin = (): boolean => {
+  if (sessionStorage.getItem("LOGIN_AUTH_INFO")) {
     return true;
   } else {
     return false;
   }
 };
 
-export { checkServerStatus, checkAuthInfo };
+export { checkServerStatus, isLogin };

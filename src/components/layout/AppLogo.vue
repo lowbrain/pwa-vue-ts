@@ -8,11 +8,6 @@ const items = [
     href: `${startUrl}`,
   },
   {
-    title: "Login",
-    disabled: false,
-    href: `${startUrl}login`,
-  },
-  {
     title: "Menu",
     disabled: false,
     href: `${startUrl}menu`,

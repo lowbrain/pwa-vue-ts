@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import router from "@/router";
 
 const isInstallAble = ref<boolean>(false);
 
 let deferredPrompt: any | null = null;
 
-window.addEventListener("beforeinstallprompt", (event: any) => {
+window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   deferredPrompt = event;
   isInstallAble.value = true;
@@ -19,12 +18,6 @@ const installApp = async () => {
 window.addEventListener("appinstalled", () => {
   deferredPrompt = null;
   isInstallAble.value = false;
-});
-
-window.matchMedia("(display-mode: standalone)").addEventListener("change", () => {
-  if (window.matchMedia("(display-mode: standalone)").matches) {
-    router.push({ name: "menu" });
-  }
 });
 </script>
 

@@ -19,20 +19,7 @@ const url = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}`;
 const loginURL = "https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=" + url;
 
 const l = async () => {
-  const param = new URLSearchParams(window.location.search);
-  console.log(param.get("auth"));
-  if (param.has("auth")) {
-    console.log("ログインが完了しました。");
-    try {
-      const authInfo = new AuthInfo(param.get("auth") ?? "");
-      authInfo.cache();
-      await authInfo.login();
-      router.push({ name: "menu" });
-    } catch (err: any) {
-      msg.value = "ERROR";
-      isProgress.value = false;
-    }
-  } else if (navigator.onLine) {
+  if (navigator.onLine) {
     console.log("サーバに問い合わせログインします。");
     try {
       await checkServerStatus(10);
@@ -50,9 +37,7 @@ const l = async () => {
 const login = (isForce: boolean) => {
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
   msg.value = "";
-  if (isLogin()) {
-    router.push({ name: "menu" });
-  } else if (isStandalone || isForce) {
+  if (isStandalone || isForce) {
     isProgress.value = true;
     l();
   } else {
@@ -65,7 +50,25 @@ const forceLoginMsg = () => {
 };
 
 window.matchMedia("(display-mode: standalone)").addEventListener("change", () => login(false));
-onMounted(() => login(false));
+
+onMounted( async () => {
+  const param = new URLSearchParams(window.location.search);
+  if (isLogin()) {
+    router.push({ name: "menu" });
+  } else if (param.has("auth")) {
+    try {
+      const authInfo = new AuthInfo(param.get("auth") ?? "");
+      authInfo.cache();
+      await authInfo.login();
+      router.push({ name: "menu" });
+    } catch (err: any) {
+      msg.value = "ERROR";
+      isProgress.value = false;
+    }
+  } else {
+    login(false);
+  }
+});
 </script>
 
 <template>

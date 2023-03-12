@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import appVersion from "@/modules/appversion";
+const appVersion = import.meta.env.VITE_APP_VERSION;
 </script>
 
 <template>

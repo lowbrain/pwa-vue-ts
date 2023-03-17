@@ -6,7 +6,7 @@ import AppLogo from "@/components/layout/AppLogo.vue";
 import AppFooter from "@/components/layout/AppFooter.vue";
 import ComponentTable from "@/components/parts/ComponentTable.vue";
 import ProgressOverlay from "@/components/parts/ProgressOverlay.vue";
-import { isLogin, connectServer, authTokenUrl } from "@/modules/authtoken";
+import { isLogin, checkServer, authTokenUrl } from "@/modules/login";
 
 const msg = ref<String>("");
 
@@ -21,7 +21,7 @@ const login = async (isForce: boolean) => {
     if (isStandalone || isForce) {
       isProgress.value = true;
       if (navigator.onLine) {
-        await connectServer(60);
+        await checkServer(60);
         window.location.href = authTokenUrl;
       } else {
         window.location.href = window.location.href + "?auth=cache";

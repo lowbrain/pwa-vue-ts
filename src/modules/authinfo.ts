@@ -1,4 +1,4 @@
-import type { AuthToken } from "@/modules/authtoken";
+import type AuthToken from "@/modules/authtoken";
 
 export default class AuthInfo {
   private _userid: string;

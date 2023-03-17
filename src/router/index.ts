@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import MenuView from "@/views/MenuView.vue";
-import { isLogin } from "@/modules/authtoken";
+import { isLogin } from "@/modules/login";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -6,67 +6,49 @@ import AppLogo from "@/components/layout/AppLogo.vue";
 import AppFooter from "@/components/layout/AppFooter.vue";
 import ComponentTable from "@/components/parts/ComponentTable.vue";
 import ProgressOverlay from "@/components/parts/ProgressOverlay.vue";
-import AuthInfo from "@/modules/authinfo";
-import { checkServerStatus, isLogin } from "@/modules/check-status";
+import { isLogin, connectServer, authTokenUrl } from "@/modules/authtoken";
 
 const msg = ref<String>("");
 
 const isProgress = ref<boolean>(true);
 
-const url = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}`;
-
-// eslint-disable-next-line prettier/prettier
-const loginURL = "https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=" + url;
-
-const l = async () => {
-  if (navigator.onLine) {
-    console.log("サーバに問い合わせログインします。");
-    try {
-      await checkServerStatus(10);
-      window.location.href = loginURL;
-    } catch (err: any) {
-      msg.value = "ERROR";
-      isProgress.value = false;
-    }
-  } else {
-    console.log("キャッシュを利用してログインします。");
-    window.location.href = window.location.href + "?auth=cache";
-  }
-};
-
-const login = (isForce: boolean) => {
+const login = async (isForce: boolean) => {
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
   msg.value = "";
-  if (isStandalone || isForce) {
-    isProgress.value = true;
-    l();
-  } else {
+  isProgress.value = false;
+
+  try {
+    if (isStandalone || isForce) {
+      isProgress.value = true;
+      if (navigator.onLine) {
+        await connectServer(60);
+        window.location.href = authTokenUrl;
+      } else {
+        window.location.href = window.location.href + "?auth=cache";
+      }
+    }
+  } catch (err) {
+    msg.value = "ERROR";
     isProgress.value = false;
   }
 };
 
-const forceLoginMsg = () => {
-  msg.value = "FORCE";
-};
+const forceLoginMsg = () => (msg.value = "FORCE");
 
 window.matchMedia("(display-mode: standalone)").addEventListener("change", () => login(false));
 
-onMounted( async () => {
-  const param = new URLSearchParams(window.location.search);
-  if (isLogin()) {
-    router.push({ name: "menu" });
-  } else if (param.has("auth")) {
-    try {
-      const authInfo = new AuthInfo(param.get("auth") ?? "");
-      authInfo.cache();
-      await authInfo.login();
+onMounted(async () => {
+  try {
+    const param = new URLSearchParams(window.location.search);
+    if (await isLogin(param.get("auth") ?? "")) {
       router.push({ name: "menu" });
-    } catch (err: any) {
-      msg.value = "ERROR";
-      isProgress.value = false;
+    } else {
+      login(false);
     }
-  } else {
-    login(false);
+  } catch (err) {
+    msg.value = "ERROR";
+    isProgress.value = false;
+    console.log(err);
   }
 });
 </script>
@@ -87,7 +69,7 @@ onMounted( async () => {
         </v-alert>
         <AppLogo />
         <v-breadcrumbs class="justify-center" color="primary">
-          <v-breadcrumbs-item title="HOME" :href="url" />
+          <v-breadcrumbs-item title="HOME" href="." />
           <v-breadcrumbs-divider />
           <v-breadcrumbs-item title="MENU" href="#" @click="forceLoginMsg()" />
         </v-breadcrumbs>

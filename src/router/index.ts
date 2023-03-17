@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import MenuView from "@/views/MenuView.vue";
-import AuthInfo from "@/modules/authinfo";
+import { isLogin } from "@/modules/authtoken";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,8 +23,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresLogin: boolean = to.matched.some((record) => record.meta.requiresLogin);
-  if (requiresLogin && !AuthInfo.isLogin()) {
-    next({ name: "login" });
+  if (requiresLogin && !isLogin("")) {
+    next({ name: "home" });
   } else {
     next();
   }

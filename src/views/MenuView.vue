@@ -2,13 +2,14 @@
 import { ref } from "vue";
 import router from "@/router";
 import AuthInfo from "@/modules/authinfo";
+import { getAutnToken, removeAuthToken } from "@/modules/authtoken";
 import AppBar from "@/components/layout/AppBar.vue";
 import AppFooter from "@/components/layout/AppFooter.vue";
 import ReloadPrompt from "@/components/prompt/ReloadPrompt.vue";
 
 const slides = ["First", "Second", "Third", "Fourth", "Fifth"];
 
-const authInfo = AuthInfo.getLoginInstance();
+const authInfo = new AuthInfo(getAutnToken());
 const time = ref(new Date());
 
 const timeout: number = 5 * 60 * 1000;
@@ -18,7 +19,7 @@ document.addEventListener("visibilitychange", () => {
       let lastTime: number = Number(sessionStorage.getItem("LAST_TIME"));
       if (Date.now() - lastTime >= timeout) {
         alert("一定時間が経過したため再認証してください。");
-        AuthInfo.removeLoginInstance();
+        removeAuthToken();
         router.push({ name: "home" });
       }
       time.value = new Date(lastTime);

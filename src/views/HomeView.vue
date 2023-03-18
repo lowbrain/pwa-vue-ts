@@ -39,7 +39,6 @@ const tryLogin = async (isForce?: boolean) => {
     errMsg.value = err;
     console.log(err);
   }
-
 };
 
 window.matchMedia("(display-mode: standalone)").addEventListener("change", () => tryLogin());

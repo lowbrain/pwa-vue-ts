@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import router from "@/router";
 import { mdiDotsVertical } from "@mdi/js";
-import { logout } from "@/modules/authctrl";
+import * as auth from "@/modules/authenticate";
 
 const reloginApp = (force: boolean) => {
-  logout(force);
+  auth.logout(force);
   router.push({ name: "home" });
 };
 </script>

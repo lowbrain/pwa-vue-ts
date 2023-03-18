@@ -5,21 +5,22 @@ import AppBar from "@/components/layout/AppBar.vue";
 import AppFooter from "@/components/layout/AppFooter.vue";
 import ReloadPrompt from "@/components/prompt/ReloadPrompt.vue";
 import type AuthInfo from "@/modules/authinfo";
-import { genAuthInfo, logout } from "@/modules/authctrl";
+import * as auth from "@/modules/authenticate";
 
-const slides = ["First", "Second", "Third", "Fourth", "Fifth"];
+const slides = ["1st", "2nd", "3rd", "4th", "5th"];
 
-const authInfo: AuthInfo = genAuthInfo();
+const authInfo: AuthInfo = auth.genAuthInfo();
 const time = ref(new Date());
 
 const timeout: number = 5 * 60 * 1000;
+
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
     if (sessionStorage.getItem("LAST_TIME")) {
       let lastTime: number = Number(sessionStorage.getItem("LAST_TIME"));
       if (Date.now() - lastTime >= timeout) {
         alert("一定時間が経過したため再認証してください。");
-        logout();
+        auth.logout();
         router.push({ name: "home" });
       }
       time.value = new Date(lastTime);

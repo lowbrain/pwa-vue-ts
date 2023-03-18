@@ -33,25 +33,24 @@ const preConnect = async (timeout: number) => {
   }
 };
 
-export const login = async (): Promise<string> => {
+export const request = async () => {
+  try {
+    await preConnect(60);
+    window.location.href = AUTH_URL;
+  } catch (err) {
+    console.log(err);
+    window.location.href = window.location.href + "?auth=cache";
+  }
+};
+
+export const getToken = (): string => {
   let token: string = "";
 
   const param = new URLSearchParams(window.location.search);
   if (param.has("auth")) {
     // 受信した認証トークンを保持
     token = param.get("auth") ?? "";
-  } else {
-    // サーバから認証トークンを取得
-    try {
-      await preConnect(60);
-      window.location.href = AUTH_URL;
-    } catch (err) {
-      console.log(err);
-      window.location.href = window.location.href + "?auth=cache";
-    }
   }
 
   return token;
 };
-
-export default login;

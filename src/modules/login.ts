@@ -1,56 +1,9 @@
-import AuthToken from "@/modules/authtoken";
+const URL = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}`;
+const SERVER_URL1 = `https://first-server.azurewebsites.net/check.html`;
+const SERVER_URL2 = `https://second-server.azurewebsites.net/check.html`;
+const AUTH_URL = `https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=${URL}`;
 
-const STORAGE_NAME = "AUTH_TOKEN";
-const SERVER_URL1: string = "https://first-server.azurewebsites.net/check.html";
-const SERVER_URL2: string = "https://second-server.azurewebsites.net/check.html";
-const url = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}`;
-const authTokenUrl = `https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=${url}`;
-
-const isLogin = async (token: string): Promise<boolean> => {
-  let result: boolean = false;
-
-  if (token.length === 0 && sessionStorage.getItem(STORAGE_NAME)) {
-    result = true;
-  } else {
-    let unverifyToken: string = token;
-    if (unverifyToken === "cache" && !localStorage.getItem(STORAGE_NAME)) {
-      throw "認証データがキャッシュされていないためキャッシュログインに失敗しました。";
-    } else if (unverifyToken === "cache" && localStorage.getItem(STORAGE_NAME)) {
-      unverifyToken = localStorage.getItem(STORAGE_NAME) ?? "";
-    }
-
-    try {
-      const authToken = new AuthToken(unverifyToken);
-      result = await authToken.verify();
-    } catch (err) {
-      throw "認証トークンの署名の検証に失敗しました。¥n" + err;
-    }
-
-    if (result) {
-      localStorage.setItem(STORAGE_NAME, unverifyToken);
-      sessionStorage.setItem(STORAGE_NAME, unverifyToken);
-    }
-
-    return result;
-  }
-
-  return result;
-};
-
-const getAutnToken = (): AuthToken => {
-  const token = sessionStorage.getItem(STORAGE_NAME) ?? "";
-  if (token.length == 0) {
-    throw "ログインがすんでいません。";
-  }
-  return new AuthToken(token);
-};
-
-const removeAuthToken = (force: boolean) => {
-  sessionStorage.removeItem(STORAGE_NAME);
-  if (force) localStorage.removeItem(STORAGE_NAME);
-};
-
-const checkServer = async (timeout: number) => {
+const preConnect = async (timeout: number) => {
   if ("onLine" in navigator && navigator.onLine) {
     // fetchのタイムアウト時間を設定
     const ctrl: AbortController = new AbortController();
@@ -75,7 +28,30 @@ const checkServer = async (timeout: number) => {
 
     // タイムアウトの設定リセット
     clearTimeout(timer);
+  } else {
+    throw "network offline";
   }
 };
 
-export { isLogin, getAutnToken, removeAuthToken, checkServer, authTokenUrl };
+export const login = async (): Promise<string> => {
+  let token: string = "";
+
+  const param = new URLSearchParams(window.location.search);
+  if (param.has("auth")) {
+    // 受信した認証トークンを保持
+    token = param.get("auth") ?? "";
+  } else {
+    // サーバから認証トークンを取得
+    try {
+      await preConnect(60);
+      window.location.href = AUTH_URL;
+    } catch (err) {
+      console.log(err);
+      window.location.href = window.location.href + "?auth=cache";
+    }
+  }
+
+  return token;
+};
+
+export default login;

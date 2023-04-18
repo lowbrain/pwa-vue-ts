@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
+import vuetify from "vite-plugin-vuetify";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 
@@ -22,6 +23,7 @@ export default defineConfig(() => {
   return {
     plugins: [
       vue(),
+      vuetify({ autoImport: true }),
       VitePWA({
         injectRegister: "inline",
         devOptions: { enabled: true },

@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import router from "@/router";
+import { useRouter } from "vue-router";
 import { mdiDotsVertical } from "@mdi/js";
 import * as auth from "@/modules/authenticate";
+
+const router = useRouter();
 
 const reloginApp = (force: boolean) => {
   auth.logout(force);

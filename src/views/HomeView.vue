@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import router from "@/router";
+import { useRouter } from "vue-router";
 import AppBar from "@/components/layout/AppBar.vue";
 import AppLogo from "@/components/layout/AppLogo.vue";
 import AppFooter from "@/components/layout/AppFooter.vue";
@@ -12,6 +12,8 @@ import * as req from "@/modules/authrequest";
 const errMsg = ref<any>(null);
 const isProgress = ref<boolean>(true);
 const isAlert = ref<boolean>(false);
+
+const router = useRouter();
 
 const tryLogin = async (isForce?: boolean) => {
   const isAllowRequest = window.matchMedia("(display-mode: standalone)").matches || isForce;

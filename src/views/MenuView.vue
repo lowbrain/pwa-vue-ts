@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import router from "@/router";
+import { useRouter } from "vue-router";
 import AppBar from "@/components/layout/AppBar.vue";
 import AppFooter from "@/components/layout/AppFooter.vue";
 import ReloadPrompt from "@/components/prompt/ReloadPrompt.vue";
@@ -12,6 +12,7 @@ const slides = ["1st", "2nd", "3rd", "4th", "5th"];
 const authInfo: AuthInfo = auth.genAuthInfo();
 const time = ref(new Date());
 
+const router = useRouter();
 const timeout: number = 5 * 60 * 1000;
 
 document.addEventListener("visibilitychange", () => {

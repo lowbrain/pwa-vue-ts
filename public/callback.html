@@ -15,8 +15,8 @@
     window.addEventListener('load', (e) => {
       const param = new URLSearchParams(window.location.search);
       const token = param.get("auth") ?? "";
-      if (typeof android !== 'undefined') android.callback(token);
+      android.callback(token);
     });
   </script>
-  <body></body>
+  <body>callback page</body>
 </html>

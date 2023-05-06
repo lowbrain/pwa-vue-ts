@@ -16,7 +16,8 @@ const isAlert = ref<boolean>(false);
 const router = useRouter();
 
 const tryLogin = async (isForce?: boolean) => {
-  const isAllowRequest = window.matchMedia("(display-mode: standalone)").matches || isForce;
+  // const isAllowRequest = window.matchMedia("(display-mode: standalone)").matches || isForce;
+  const isAllowRequest = true;
 
   // ログイン済みであったら即時メニューに遷移
   if (auth.isLoggedin()) {

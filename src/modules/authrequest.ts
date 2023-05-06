@@ -1,4 +1,4 @@
-const URL = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}`;
+const URL = `${location.protocol}//${location.host}${import.meta.env.BASE_URL}callback.html`;
 const SERVER_URL1 = `https://first-server.azurewebsites.net/check.html`;
 const SERVER_URL2 = `https://second-server.azurewebsites.net/check.html`;
 const AUTH_URL = `https://first-server.azurewebsites.net/login.jsp?popup_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fpopup.jsp%3Fjump_url%3Dhttps%3A%2F%2Fsecond-server.azurewebsites.net%2Findex.jsp&auth_url=https%3A%2F%2Fsecond-server.azurewebsites.net%2Fauth.jsp&return_url=https%3A%2F%2Ffirst-server.azurewebsites.net%2Fredirect.jsp&redirect_url=${URL}`;

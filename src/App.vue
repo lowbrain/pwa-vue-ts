@@ -7,5 +7,5 @@ import InstallPrompt from "@/components/prompt/InstallPrompt.vue";
   <v-app>
     <RouterView />
   </v-app>
-  <InstallPrompt />
+  <!-- <InstallPrompt /> -->
 </template>

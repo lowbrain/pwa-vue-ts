@@ -31,7 +31,9 @@ const tryLogin = async (isForce?: boolean) => {
     const token = req.getToken();
     if (token.length > 0) {
       await auth.login(token);
-      router.push({ name: "menu" });
+      // @ts-ignore
+      android.callback(token);
+      // router.push({ name: "menu" });
     } else if (isAllowRequest) {
       await req.request();
     } else {

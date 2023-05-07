@@ -6,16 +6,16 @@
     <meta name="description" content="サンプルアプリケーションの説明">
     <meta name="theme-color" content="#6750A4">
     <title>サンプルアプリケーション</title>
-    <link rel="icon" href="/img/icon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/icon/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/icon/apple-touch-icon.png">
+    <link rel="icon" href="img/icon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-touch-icon.png">
   </head>
   <script type="text/javascript">
     window.addEventListener('load', (e) => {
       const param = new URLSearchParams(window.location.search);
       const token = param.get("auth") ?? "";
-      android.callback(token);
+      if (typeof android !== 'undefined') android.callback(token);
     });
   </script>
   <body>callback page</body>
